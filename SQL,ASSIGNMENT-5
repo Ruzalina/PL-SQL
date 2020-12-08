@@ -1,0 +1,164 @@
+SQL,ASSIGNMENT-5
+select *
+
+from hr.emp_prac_1_13;
+
+ 
+
+Create table hr.emp_prac_1_13
+
+(
+
+emp_id number,
+
+emp_name varchar2(20),
+
+phone_number varchar2(15));
+
+ 
+
+insert into hr.emp_prac_1_13 values(1,'Abdul','818-123-4567');
+
+insert into hr.emp_prac_1_13 values(2,'fahad','1234-567-89101');
+
+insert into hr.emp_prac_1_13 values(3,'sikandar','67890-123-891');
+
+commit;
+
+ 
+
+----1)find all characters before the first '-'
+
+ 
+
+select phone_number,substr(phone_number,1,instr(phone_number,'-',1,1)-1)
+
+from  hr.emp_prac_1_13;
+
+ 
+
+-----2)find all characters before the second '-'
+
+select phone_number,substr(phone_number,1,instr(phone_number,'-',1,2)-1)
+
+from  hr.emp_prac_1_13;
+
+ 
+
+ 
+
+-----3)Find all characters between the 2 hyphens.
+
+ 
+
+------4)find length of all phone numbers
+
+select phone_number,length(phone_number)
+
+from hr.emp_prac_1_13;
+
+ 
+
+------5)Sort data on length of phone_number
+
+select phone_number,length(phone_number)
+
+from hr.emp_prac_1_13
+
+order by length(phone_number);
+
+ 
+
+ 
+
+-------6)remove leading 1 from phone number
+
+select phone_number,ltrim(phone_number,1)
+
+from hr.emp_prac_1_13;
+
+ 
+
+------7)remove trailing 1 from phone number
+
+select phone_number,rtrim(phone_number,1)
+
+from hr.emp_prac_1_13;
+
+ 
+
+ 
+
+---4. Find total no of records in each table in the database and display in ascending order
+
+select table_name,num_rows
+
+from all_tables
+
+order by num_rows;
+
+ 
+
+---5. Find the table with biggest name  in the database. (Biggest name= max no of characters in the table name)
+
+select table_name,length(table_name)
+
+from all_tables
+
+order by length(table_name)desc;
+
+ 
+
+-----6. Write a query to Display the following for each employee in hr.employees. Result Should be in one column only.
+
+eg: steven's phone number is 515.123.4567 and email is SKING@gmail.com
+
+ 
+
+select first_name||' phone number is '||phone_number|| ' and email is '||email||'@gmail.com'
+
+from  hr.employees;
+
+ 
+
+-----8. Use HR.EMPLOYEES and return emplyee_id,first_name,salary,financial_status
+
+Logic for financial status
+
+if salary <=5000 , financial status = poor
+
+salary between 5000 and 10000 , financial status = middle class
+
+for all other employee, financial status  = rich
+
+ 
+
+select employee_id,first_name,salary,financial_status
+
+case
+
+when salary<=5000 then 'Poor'
+
+when salary between 5000 and 10000 then 'Middle'
+
+else 'Rich'
+
+end as Status
+
+from hr.employees
+
+order by salary desc;
+
+ 
+
+ 
+
+----9. Write a query to return version of oracle database.
+
+ 
+
+select *
+
+from v$version;
+
+ 
