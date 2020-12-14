@@ -1,0 +1,6 @@
+SQL interview questions
+1. What is the difference between where and having in SQL.
+
+Where is used to filter out data, Having is used to filter out data when we have aggregate functions in select statement(count,min,max,sum,avg).
+
+In the clause 'group by’,we have to use both 'where' and 'having' in the same querry, in this case 'where' has to be before the clause 'group by’.
