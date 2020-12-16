@@ -1,0 +1,13 @@
+How do you find duplicates in a table.
+
+select emp_id,emp_name,count(*)
+from table_name
+group by emp_id, emp_name
+having count(*)>1;
+
+How delete duplicates.
+
+delete from table_name
+where rowid not in(select min(rowid))
+from table_name
+group by column_names;
