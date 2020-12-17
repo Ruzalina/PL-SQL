@@ -1,0 +1,16 @@
+Rank and Dense rank.
+
+Rank returns an increasing unique number for each row starting at 1.When there are duplicates, same rank is assigned to all the duplicate rows, but the rank function will skip rankings.
+
+Dense_Rank returns an increasing unique number for each row starting at 1.When there are duplicates, same rank is assigned to all the duplicate rows, but the dense_rank function will not skip any ranks.
+
+
+
+Rank:Aggregate function         Analytic function
+     (returns the rank of row  (returns a single result
+    within a group of rows)     for each row)
+
+
+select rank(1000)         select salary,deptid, 
+within group              rank()over(partition by
+(order by salary desc);   deptid order by salary desc);
