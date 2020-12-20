@@ -1,0 +1,81 @@
+INFORMATICA
+Informatica PC-extracts data from all the systems and store it into a single table.
+
+Source-from which the new changes are coming
+Target-to which you are moving the new changes
+
+To Load Data to the Db using shortcuts:
+
+Login to PC
+1.Import the structure of Source.-go to Source Analyzer, -sources,import from file, control S.
+2.Import the structure of Target.-go to Target Designer,-from folder Sources drag and drop Source into the Target Designer,double click,data type, columns,-control S.
+
+3.-go to targets on the top,-generate and execute SQL,
+-go to SQL developer to check the table is present in db.
+
+4.Create Mapping.-go to Mapping Designer,-mappings on the top,create(m_FF_ORA_table_name),-drag and drop Source and Target,arrange all if mapping is messed(Mapping should be valid),-control S.
+
+5.-Go to Mappings,generate Workflow, go to workflows, refresh by logout,login, it’s created,-check /fail parent if task fails(if no choice, session will fail, workflow will succeed),/stop an error:always 1(from first error it will stop),/reading data from the right folder,/truncate target table option(you don’t need to load data again and again),-control S.
+
+6.Start Workflow.
+
+If you want:
+-to make changes, Take a BACK UP(mappings,copy as m_FF_ORA_table_name_bkp)(if messed up, control C and Control V)
+
+-to see which mapping the folder uses(right click-> dependencies->right click->open in workspace)
+
+-to find tables,fields(control F or search button)
+
+-Green ckeck marks means Checked out(Only I have access),Check In-when work is done (versioning on the top->find ckechouts->all folders).
+
+-to see who is connected to your pc(right click->versioning->view history)
+
+-to delete Mapping(hit delete->control S(commit)
+
+-to bring everything back(right click->versioning>undo checkout
+
+-to create mapping with the same name of deleting name(versioning on the top->find ckeckouts->ckeck in)
+
+When you have Constraint in your target table, target load type:Normal, if Bulk-fail
+
+Normal.                                     Bulk
+(if your source have                  (it will pick up 
+hundreds records it will             hundreds records     
+pick up 1 record and                and load hundreds
+load 1 record).                      records)
+
+To keep Bulk:
+
+PRE SQL-disable                     POST SQL-enable
+(whatever you type will happen (whatever you type will
+before the data is loaded)     happen after the data
+                               is loaded)
+                               (update,delete,create)
+How do you use Bulk mode when target has constraints?
+1)alter table table_name disable/enable constraint constraint_name(sys);
+2)if hundreds constraints: create reusable stored procedure to disable constraint in pre sql and enable constraint in post sql.
+
+Call hr.disable_enable_constarints(‘schema_name’,
+’table_name’,’disable/enable’-action.
+
+
+To add constraint:
+Alter table table_name
+Add unique(deptid)
+
+Convert: Abdul—->abdul
+Go to POST sql and type:
+update hr.table_name set name=‘abdul’
+where empid=1;
+Commit
+
+Create another table with the same structure as previous table:
+
+create table table_name_1
+as
+select* from table_name
+where 1=2;
+
+To load data from previous table to new table:
+Go to session, edit tasks,mapping,target table name:table_name_1
+Table name Prefix:HR (the properties of the session level will override the properties of the mapping level)
