@@ -1,0 +1,10 @@
+Index
+What are the different types of Index?
+Indexes in SQL are used to speed up SQL queries. 
+Types of indexes:
+bitmap= for columns that has duplicates (not default, have to mention 'bitmap' in the syntax (good ex. is gender column)).
+
+b-tree= for columns that doesn't have duplicates (default),they are best for high cardinality.
+
+Create index index_name_idx
+on table name(column_names);
